@@ -14,6 +14,7 @@ This node application uses node worker thread to consume long polling service an
  3. Use command: `npm install`
 
 Alternatively for MongoDB, To run with docker container use below:
+- `docker pull mongo`
 - `docker-compose up -d`
  
 **Run**
