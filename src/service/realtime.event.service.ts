@@ -9,6 +9,6 @@ export default async function getRealtimeEvent(token: any) {
     const headers = { 'Authorization': `Bearer ${token}` };
     const result = await externalApiRequest(getURL, 'GET', null, headers);
 
-    console.log('result', result)
+    console.log('Data from /results API:', result)
     return result;
 }

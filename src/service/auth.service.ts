@@ -7,7 +7,7 @@ export default async function authenticateAndGetToken(body: any) {
     
     const authURL = `${simulatorURL}/auth`;
 
-    const result = await externalApiRequest(authURL, 'POST', body, null);    
+    const result:any = await externalApiRequest(authURL, 'POST', body, null);    
     
     return result.token;
 }

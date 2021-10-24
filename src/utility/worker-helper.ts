@@ -26,7 +26,7 @@ const workerTs = (wkOpts: WorkerOptions) => {
  * and stores data into MongoDB
  */
 export async function startWorkerThread() {
-    // Start a worker thread as file worker.ts 
+    // Start a worker thread as worker.ts 
     const wk = workerTs({ workerData: { filePath: './src/utility/worker.ts' } });
     wk.on("online", () => console.log('Worker UP'));
     wk.on("message", (msg) => console.log('Message from worker:', msg));
