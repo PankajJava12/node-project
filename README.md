@@ -1,15 +1,23 @@
 
-Setup
-Prerequesites:
-NodeJS: v14.18.1
-MongoDB: 4.2.10
+This node application uses node worker to consume long polling service and persist the records in MongoDB via mongoose module.
 
-Alternatively for MongoDB, To run with docker container use below
+**Prerequesites**:
+
+ - NodeJS: v14.18.1
+- MongoDB: 4.2.10
+- Docker for MongoDB **(Optional)**
+
+**Installation**
+
+ 1. Clone the project by `git clone https://github.com/PankajJava12/node-project.git`
+ 2. Navigate to project directory: node-project
+ 3. Fire command: `npm install`
+
+Alternatively for MongoDB, To run with docker container use below:
 `docker-compose up -d`
+ 
+**Run**
+Run the app by `npm start`
 
-
-Run
-run the app by `npm run dev`
-
-Tests
+**Tests**
 To run the unit test `npm run test`
