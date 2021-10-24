@@ -8,14 +8,18 @@ const { SIMULATOR_AUTH_EMAIL, SIMULATOR_AUTH_PASSWORD } = process.env;
 let token: any;
 
 /**
- * This function will do polling on realtime simulator and get the event data 
+ * @function init
+ * @description This function will do polling on realtime simulator and get the event data 
+ * The stores the event data into MongoDB
  */
 async function init() {
     try {
-        if (!token) token = await authenticateAndGetToken({ 
-            email: SIMULATOR_AUTH_EMAIL, 
-            password: SIMULATOR_AUTH_PASSWORD 
-        });
+        if (!token) {
+            token = await authenticateAndGetToken({
+                email: SIMULATOR_AUTH_EMAIL,
+                password: SIMULATOR_AUTH_PASSWORD
+            });
+        }
 
         const result:any = await getRealtimeEvent(token);
 
@@ -24,7 +28,9 @@ async function init() {
             await race.save();
             parentPort?.postMessage('Saved one race document in mongo db')
         } else {
-            console.log('----GOT NULLED----');
+            console.log('----Got null response from /results API----');
+            console.log('----System will request the event data again after 15 seconds----');
+            await new Promise(resolve => setTimeout(resolve, 15000));
         }
 
         await init();
@@ -38,6 +44,7 @@ async function init() {
             await init();
         }
         if (error.statusCode === 204) {
+            // In case of status code 204, wait for 15 seconds and then request again to /results API
             await new Promise(resolve => setTimeout(resolve, 15000));
             await init();
         }

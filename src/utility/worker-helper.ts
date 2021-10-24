@@ -1,6 +1,11 @@
-
 import { Worker, WorkerOptions } from 'worker_threads';
 
+/**
+ * @function workerTs
+ * @description This function returns worker thread by using filePath from wkOpts param
+ * @param wkOpts Worker options with workerData
+ * @returns worker thread 
+ */
 const workerTs = (wkOpts: WorkerOptions) => {
     wkOpts.eval = true;
 
@@ -15,8 +20,14 @@ const workerTs = (wkOpts: WorkerOptions) => {
     );
 }
 
+/**
+ * @function startWorkerThread
+ * @description This function starts worker thread and consume realtime event API
+ * and stores data into MongoDB
+ */
 export async function startWorkerThread() {
-    let wk = workerTs({ workerData: { filePath: './src/utility/worker.ts' } });
+    // Start a worker thread as file worker.ts 
+    const wk = workerTs({ workerData: { filePath: './src/utility/worker.ts' } });
     wk.on("online", () => console.log('Worker UP'));
     wk.on("message", (msg) => console.log('Message from worker:', msg));
     wk.on("exit", (code) => console.warn('exit', code));
